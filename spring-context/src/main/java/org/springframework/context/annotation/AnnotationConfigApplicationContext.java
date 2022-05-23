@@ -84,8 +84,14 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	 * {@link Configuration @Configuration} classes
 	 */
 	public AnnotationConfigApplicationContext(Class<?>... componentClasses) {
+		//1 实例化BeanFactory【DefaultListableBeanFactory】工厂，用于生成Bean对象
+		//2 实例化BeanDefinitionReader注解配置读取器，用于对特定注解（如@Service、@Repository）的类进行读取转化成
+		//   BeanDefinition 对象，（BeanDefinition 是 Spring 中极其重要的一个概念，它存储了 bean 对象的所有特征信息，
+		//   如是否单例，是否懒加载，factoryBeanName 等）
 		this();
+		//注册配置类BeanDefinition到容器
 		register(componentClasses);
+		//刷新容器
 		refresh();
 	}
 
